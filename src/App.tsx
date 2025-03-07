@@ -1,19 +1,20 @@
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import ArchivePage from './pages/ArchivePage';
+import Navbar from './components/Navbar';
 
-function App() {
-
+const App: React.FC = () => {
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <button className="btn btn-neutral">Neutral</button>
-      <button className="btn btn-primary">Primary</button>
-      <button className="btn btn-secondary">Secondary</button>
-      <button className="btn btn-accent">Accent</button>
-      <button className="btn btn-info">Info</button>
-      <button className="btn btn-success">Success</button>
-      <button className="btn btn-warning">Warning</button>
-      <button className="btn btn-error">Error</button>
-    </>
-  )
-}
+    <BrowserRouter>
+      <Navbar />  {/* common navigation on all pages */}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/archive" element={<ArchivePage />} />
+        {/* Redirect or catch-all route: navigate to home if route not found */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
-export default App
+export default App;
